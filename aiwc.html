@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIWC Dancing Club - Premium Dance Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://i.pinimg.com/1200x/6f/9f/c3/6f9fc36a0bc48d71f9a89860eec738d5.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+        
+        /* Navigation Styles */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: #ff1493;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #ff1493;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        /* Page Styles */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        header {
+            background: url('https://i.pinimg.com/736x/6a/81/c3/6a81c3173ba6158e548b824580820e49.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+        header h1, header p {
+            position: relative;
+            z-index: 2;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        header p {
+            font-size: 1.2em;
+            margin: 10px 0 0;
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 60px;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .image-container h2 {
+            color: #ff1493;
+            font-size: 2em;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Full Frame A4 Size Video Gallery with Pagination */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .video-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            /* Full Frame A4 Size Ratio: 1:1.414 */
+            aspect-ratio: 1 / 1.414;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+        
+        .video-frame {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 20px;
+            text-align: center;
+            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-item:hover .video-info {
+            transform: translateY(0);
+        }
+        
+        .video-info h3 {
+            color: #ff1493;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        
+        .video-info p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #ff1493;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 45px;
+        }
+        
+        .page-btn:hover {
+            background: #e01180;
+        }
+        
+        .page-btn.active {
+            background: #333;
+        }
+        
+        .page-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-info {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+        
+        /* Video Modal for Full-Screen Playback */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            width: 95%;
+            height: 95%;
+            background: black;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+        }
+        
+        .modal-title {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .modal-video-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* About Page Styles */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Classes Page Styles */
+        .classes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .class-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .class-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .class-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .class-card:hover .class-image img {
+            transform: scale(1.1);
+        }
+        
+        .class-info {
+            padding: 20px;
+        }
+        
+        .class-info h3 {
+            color: #ff1493;
+            margin-bottom: 10px;
+        }
+        
+        .class-info p {
+            margin-bottom: 15px;
+        }
+        
+        .class-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        /* Instructors Page Styles */
+        .instructors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .instructor-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .instructor-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .instructor-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .instructor-info {
+            padding: 20px;
+        }
+        
+        .instructor-info h3 {
+            color: #ff1493;
+            margin-bottom: 10px;
+        }
+        
+        .instructor-info .specialty {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: #ff1493;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #333;
+        }
+        
+        /* Contact Page Styles */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .contact-info h3 {
+            color: #ff1493;
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            color: #ff1493;
+            font-size: 1.2em;
+            width: 30px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #ff1493;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #e01180;
+        }
+        
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            header h1 { 
+                font-size: 2em; 
+            }
+            
+            .gallery { 
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+                gap: 20px;
+            }
+            
+            .image-container img { 
+                max-width: 100%; 
+            }
+            
+            .video-item {
+                aspect-ratio: 1 / 1.414; /* Maintain A4 ratio on mobile */
+            }
+            
+            .modal-content { 
+                width: 98%; 
+                height: 98%; 
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .about-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .classes-container, .instructors-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-info {
+                transform: translateY(0);
+                position: relative;
+                background: white;
+            }
+            
+            .video-item:hover .video-info {
+                transform: translateY(0);
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .video-item {
+                aspect-ratio: 1 / 1.414; /* Maintain A4 ratio on small mobile */
+            }
+            
+            .modal-content { 
+                width: 100%; 
+                height: 100%; 
+                border-radius: 0; 
+            }
+            
+            header {
+                padding: 60px 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            header p {
+                font-size: 1em;
+            }
+            
+            .logo {
+                font-size: 1.5em;
+            }
+            
+            .page-btn {
+                padding: 8px 12px;
+                min-width: 40px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-info h3 {
+                font-size: 1em;
+            }
+            
+            .video-info p {
+                font-size: 0.8em;
+            }
+            
+            .pagination {
+                gap: 5px;
+            }
+            
+            .page-btn {
+                padding: 6px 10px;
+                min-width: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-dance"></i>
+                AIWC Dancing Club
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#" class="nav-link" data-page="classes">Classes</a></li>
+                <li><a href="#" class="nav-link" data-page="instructors">Instructors</a></li>
+                <li><a href="#" class="nav-link" data-page="gallery">Gallery</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <header>
+            <h1>AIWC Dancing Club</h1>
+            <p>Experience the rhythm of dance with our premium collection of moves and inspiration.</p>
+        </header>
+
+        <section class="image-container">
+            <h2>Featured Dance Image</h2>
+            <p>Check out this stunning dance visual—perfect for inspiration!</p>
+            <img src="https://i.pinimg.com/1200x/74/11/54/74115447c1157b2e44545d7fa789ee18.jpg" alt="Dance Inspiration Image">
+        </section>
+
+        <section>
+            <h2 style="text-align: center; color: white; font-size: 2em; margin-bottom: 20px;">Dance Video Gallery</h2>
+            <p style="text-align: center; color: white; font-size: 1.1em;">Click on any video to play it in full size directly on our website!</p>
+            
+            <!-- Video Gallery with Pagination -->
+            <div class="gallery" id="videoGallery">
+                <!-- Videos will be dynamically loaded here -->
+            </div>
+            
+            <!-- Pagination Controls -->
+            <div class="pagination">
+                <button class="page-btn" id="prevPage" disabled>Previous</button>
+                <span class="page-info" id="pageInfo">Page 1 of 3</span>
+                <button class="page-btn" id="nextPage">Next</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <header>
+            <h1>About AIWC Dancing Club</h1>
+            <p>Learn more about our mission, vision, and dance philosophy</p>
+        </header>
+        <section>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>Founded in 2010, AIWC Dancing Club has been at the forefront of dance education and performance. We believe that dance is not just movement, but a form of expression that connects people across cultures and backgrounds.</p>
+                    
+                    <h3>Our Mission</h3>
+                    <p>To provide exceptional dance education while fostering creativity, confidence, and community through the art of movement.</p>
+                    
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li>Creativity and self-expression</li>
+                        <li>Technical excellence</li>
+                        <li>Inclusivity and diversity</li>
+                        <li>Community building</li>
+                        <li>Lifelong learning</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dance Studio">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Classes Page -->
+    <div id="classes" class="page">
+        <header>
+            <h1>Dance Classes</h1>
+            <p>Find the perfect class for your skill level and interests</p>
+        </header>
+        <section>
+            <div class="classes-container">
+                <div class="class-card">
+                    <div class="class-image">
+                        <img src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ballet Class">
+                    </div>
+                    <div class="class-info">
+                        <h3>Ballet Fundamentals</h3>
+                        <p>Learn the foundational techniques of classical ballet with our expert instructors.</p>
+                        <div class="class-meta">
+                            <span><i class="far fa-clock"></i> Mon & Wed, 6-7 PM</span>
+                            <span><i class="fas fa-user"></i> All Levels</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="class-card">
+                    <div class="class-image">
+                        <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hip Hop Class">
+                    </div>
+                    <div class="class-info">
+                        <h3>Hip Hop Grooves</h3>
+                        <p>Master urban dance styles and develop your own unique flow in these high-energy classes.</p>
+                        <div class="class-meta">
+                            <span><i class="far fa-clock"></i> Tue & Thu, 7-8 PM</span>
+                            <span><i class="fas fa-user"></i> Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="class-card">
+                    <div class="class-image">
+                        <img src="https://images.unsplash.com/photo-1543943396-9d0dca01156f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Contemporary Class">
+                    </div>
+                    <div class="class-info">
+                        <h3>Contemporary Expression</h3>
+                        <p>Explore fluid movements and emotional storytelling through contemporary dance techniques.</p>
+                        <div class="class-meta">
+                            <span><i class="far fa-clock"></i> Fri, 5-6:30 PM</span>
+                            <span><i class="fas fa-user"></i> Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Instructors Page -->
+    <div id="instructors" class="page">
+        <header>
+            <h1>Our Instructors</h1>
+            <p>Meet our talented and experienced dance instructors</p>
+        </header>
+        <section>
+            <div class="instructors-container">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Maria Rodriguez">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Maria Rodriguez</h3>
+                        <p class="specialty">Ballet & Contemporary</p>
+                        <p>Former principal dancer with 15 years of teaching experience. Maria specializes in classical technique and contemporary fusion.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="James Wilson">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>James Wilson</h3>
+                        <p class="specialty">Hip Hop & Street Styles</p>
+                        <p>Choreographer for major music videos and tours. James brings urban energy and technical precision to his classes.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sophie Chen">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Sophie Chen</h3>
+                        <p class="specialty">Jazz & Modern</p>
+                        <p>Broadway performer turned educator. Sophie combines theatrical expression with technical excellence in her teaching.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Page -->
+    <div id="gallery" class="page">
+        <header>
+            <h1>Dance Gallery</h1>
+            <p>Explore our complete collection of dance videos and performances</p>
+        </header>
+        <section>
+            <!-- Gallery Page also has pagination -->
+            <div class="gallery" id="galleryVideoGallery">
+                <!-- Videos will be dynamically loaded here -->
+            </div>
+            
+            <!-- Pagination Controls for Gallery Page -->
+            <div class="pagination">
+                <button class="page-btn" id="galleryPrevPage" disabled>Previous</button>
+                <span class="page-info" id="galleryPageInfo">Page 1 of 3</span>
+                <button class="page-btn" id="galleryNextPage">Next</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <header>
+            <h1>Contact Us</h1>
+            <p>Get in touch to start your dance journey with us</p>
+        </header>
+        <section>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Visit Our Studio</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>123 Dance Avenue, Creative District<br>New York, NY 10001</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <p>(555) 123-4567</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p>info@aiwcdance.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <p>Monday - Friday: 9am - 9pm<br>Saturday: 10am - 6pm<br>Sunday: 12pm - 5pm</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
+                        <a href="#"><i class="fab fa-tiktok fa-2x"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Video Modal for Full-Screen Playback -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Dance Video</div>
+                <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+            </div>
+            <div class="modal-video-container">
+                <iframe id="modalVideo" frameborder="0" scrolling="no" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 AIWC Dancing Club. Premium dance experiences await—contact us for classes!</p>
+    </footer>
+
+    <script>
+        // All 12 videos data
+        const allVideos = [
+            { id: '134404370123676326', title: 'Quick Saves in 2025 - Snap Dance Moves', description: 'Experience the latest snap dance trends' },
+            { id: '993043786561423089', title: 'Contemporary Dance Videos', description: 'Fluid movements and emotional expression' },
+            { id: '608689705894820162', title: 'Simple Dance', description: 'Easy-to-follow dance moves for beginners' },
+            { id: '32651166039773275', title: 'Snap Dance', description: 'Sharp, precise movements with urban flair' },
+            { id: '393220611233490603', title: 'Contemporary Dance Videos', description: 'Explore boundaries of movement' },
+            { id: '588775351308656123', title: 'Simple Dance', description: 'Fun and accessible dance routines' },
+            { id: '17451517302829168', title: 'Contemporary Dance Moves', description: 'Advanced contemporary techniques' },
+            { id: '8796161768285679', title: 'Urban Snap Dance', description: 'Street-style dance with urban influences' },
+            { id: '5418462046834799', title: 'Simple Contemporary Routines', description: 'Beginner-friendly contemporary sequences' },
+            { id: '1008947122753978115', title: 'Dance Video Compilation', description: 'Collection of our best dance moments' },
+            { id: '1058064506184068661', title: 'Quick Dance Snaps', description: 'Short and energetic dance sequences' },
+            { id: '1015632153481442299', title: 'Dance Inspiration Video', description: 'Get inspired with beautiful performance' }
+        ];
+
+        // Pagination variables
+        const videosPerPage = 5;
+        let currentPage = 1;
+        let galleryCurrentPage = 1;
+        const totalPages = Math.ceil(allVideos.length / videosPerPage);
+
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinksContainer = document.getElementById('navLinks');
+        
+        // Switch between pages
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = link.getAttribute('data-page');
+                
+                // Update active nav link
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show target page
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === targetPage) {
+                        page.classList.add('active');
+                    }
+                });
+                
+                // Close mobile menu if open
+                navLinksContainer.classList.remove('active');
+                
+                // Load videos for gallery page if needed
+                if (targetPage === 'gallery') {
+                    loadGalleryVideos(galleryCurrentPage);
+                }
+            });
+        });
+        
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+        
+        // Function to load videos for a specific page
+        function loadVideos(page, containerId, isGallery = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            const startIndex = (page - 1) * videosPerPage;
+            const endIndex = Math.min(startIndex + videosPerPage, allVideos.length);
+            const pageVideos = allVideos.slice(startIndex, endIndex);
+            
+            pageVideos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.onclick = () => openVideoModal(video.id, video.title);
+                
+                videoItem.innerHTML = `
+                    <div class="video-frame">
+                        <iframe src="https://assets.pinterest.com/ext/embed.html?id=${video.id}" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                    </div>
+                `;
+                
+                container.appendChild(videoItem);
+            });
+            
+            // Update pagination info
+            if (isGallery) {
+                document.getElementById('galleryPageInfo').textContent = `Page ${page} of ${totalPages}`;
+                document.getElementById('galleryPrevPage').disabled = page === 1;
+                document.getElementById('galleryNextPage').disabled = page === totalPages;
+            } else {
+                document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
+                document.getElementById('prevPage').disabled = page === 1;
+                document.getElementById('nextPage').disabled = page === totalPages;
+            }
+        }
+        
+        // Function to load gallery videos
+        function loadGalleryVideos(page) {
+            loadVideos(page, 'galleryVideoGallery', true);
+        }
+        
+        // Initial load
+        loadVideos(currentPage, 'videoGallery');
+        
+        // Pagination event listeners for home page
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                loadVideos(currentPage, 'videoGallery');
+            }
+        });
+        
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                loadVideos(currentPage, 'videoGallery');
+            }
+        });
+        
+        // Pagination event listeners for gallery page
+        document.getElementById('galleryPrevPage').addEventListener('click', () => {
+            if (galleryCurrentPage > 1) {
+                galleryCurrentPage--;
+                loadGalleryVideos(galleryCurrentPage);
+            }
+        });
+        
+        document.getElementById('galleryNextPage').addEventListener('click', () => {
+            if (galleryCurrentPage < totalPages) {
+                galleryCurrentPage++;
+                loadGalleryVideos(galleryCurrentPage);
+            }
+        });
+        
+        // Function to open video in full-screen modal
+        function openVideoModal(videoId, title) {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            // Set video source and title
+            modalVideo.src = `https://assets.pinterest.com/ext/embed.html?id=${videoId}`;
+            modalTitle.textContent = title;
+            
+            // Show modal
+            modal.classList.add('active');
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to close video modal
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            // Hide modal
+            modal.classList.remove('active');
+            
+            // Reset video source to stop playback
+            modalVideo.src = '';
+            
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside the content
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+        
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
